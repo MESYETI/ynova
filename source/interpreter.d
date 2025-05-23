@@ -146,25 +146,25 @@ class Interpreter {
 		return res;
 	}
 
-	void RunRule(Rule rule) {
+	bool RunRule(Rule rule) {
 		subst = new string[string];
 
 		if (rule.conditions.empty()) {
 			if (runEmpty) runEmpty = false;
-			else          return;
+			else          return false;
 		}
 
 		foreach (ref op ; rule.conditions) {
 			if (op.stack !in stacks) {
-				return;
+				return false;
 			}
 
 			if (stacks[op.stack].empty()) {
-				return;
+				return false;
 			}
 
 			if (stacks[op.stack][$ - 1].length != op.tuple.length) {
-				return;
+				return false;
 			}
 
 			foreach (i, ref word ; stacks[op.stack][$ - 1]) {
@@ -173,7 +173,7 @@ class Interpreter {
 					continue;
 				}
 
-				if (op.tuple[i] != stacks[op.stack][$ - 1][i]) return;
+				if (op.tuple[i] != stacks[op.stack][$ - 1][i]) return false;
 			}
 		}
 
@@ -198,18 +198,23 @@ class Interpreter {
 		if (rule.builtIn) {
 			rule.func(this);
 		}
+
+		return true;
 	}
 
 	void Run() {
 		while (true) {
 			rulesRun = 0;
 			foreach (ref rule ; rules) {
-				RunRule(rule);
+				if (RunRule(rule)) {
+					goto next;
+				}
 			}
 
 			if (rulesRun == 0) {
 				return;
 			}
+			next:
 		}
 	}
 }

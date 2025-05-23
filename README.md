@@ -7,5 +7,5 @@ dub build
 ```
 
 ## Built in rules
-#### `|print $x|`
+#### `|:: print $x|`
 Prints `$x` to stdout
