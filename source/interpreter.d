@@ -2,6 +2,7 @@ module ynova.interpreter;
 
 import std.uni;
 import std.array;
+import std.range;
 import std.stdio;
 import std.format;
 import std.algorithm;
@@ -186,7 +187,7 @@ class Interpreter {
 		}
 
 		// run rule
-		foreach (ref op ; rule.ops) {
+		foreach (ref op ; rule.ops.retro()) {
 			if (op.stack !in stacks) {
 				stacks[op.stack] = string[][].init;
 			}
