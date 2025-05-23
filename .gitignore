@@ -1,0 +1,17 @@
+.dub
+docs.json
+__dummy.html
+docs/
+/ynova
+ynova.so
+ynova.dylib
+ynova.dll
+ynova.a
+ynova.lib
+ynova-test-*
+*.exe
+*.pdb
+*.o
+*.obj
+*.lst
+test.nv

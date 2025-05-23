@@ -1,0 +1,9 @@
+{
+	"authors": [
+		"mesyeti"
+	],
+	"copyright": "Copyright © 2025, mesyeti",
+	"description": "A Nova interpreter",
+	"license": "MIT",
+	"name": "ynova"
+}
